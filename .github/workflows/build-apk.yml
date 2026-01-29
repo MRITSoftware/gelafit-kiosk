@@ -31,10 +31,14 @@ jobs:
       
     - name: Setup Gradle Wrapper
       run: |
-        if [ ! -f "./gradlew" ]; then
-          echo "Gradle wrapper não encontrado. Criando..."
-          gradle wrapper --gradle-version 8.1 --distribution-type all
+        if [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
+          echo "Downloading gradle-wrapper.jar..."
+          mkdir -p gradle/wrapper
+          curl -L -o gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.1.0/gradle/wrapper/gradle-wrapper.jar || \
+          wget -O gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.1.0/gradle/wrapper/gradle-wrapper.jar || \
+          echo "Failed to download wrapper jar, will try to generate it"
         fi
+        chmod +x gradlew || true
         
     - name: Cache Gradle dependencies
       uses: actions/cache@v3
