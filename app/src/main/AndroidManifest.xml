@@ -61,12 +61,7 @@
             </intent-filter>
         </receiver>
 
-        <!-- WorkManager para monitoramento periódico -->
-        <receiver
-            android:name="androidx.work.impl.background.systemjob.SystemJobService"
-            android:enabled="true"
-            android:exported="false"
-            tools:targetApi="n" />
+        <!-- WorkManager se registra automaticamente, não precisa ser declarado aqui -->
     </application>
 
 </manifest>
