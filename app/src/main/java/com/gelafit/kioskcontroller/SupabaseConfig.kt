@@ -8,9 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 object SupabaseConfig {
-    // TODO: Substitua pelas suas credenciais do Supabase
-    private const val SUPABASE_URL = "https://seu-projeto.supabase.co"
-    private const val SUPABASE_KEY = "sua-chave-anon-key"
+    private const val SUPABASE_URL = "https://kihyhoqbrkwbfudttevo.supabase.co"
+    private const val SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpaHlob3Ficmt3YmZ1ZHR0ZXZvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTU1NTUwMjcsImV4cCI6MjAzMTEzMTAyN30.XtBTlSiqhsuUIKmhAMEyxofV-dRst7240n912m4O4Us"
     
     // TODO: Substitua pelo package name do seu app Flutter
     const val FLUTTER_APP_PACKAGE = "com.gelafit.app"
