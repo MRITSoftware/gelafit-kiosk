@@ -34,9 +34,11 @@ jobs:
         if [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
           echo "Downloading gradle-wrapper.jar..."
           mkdir -p gradle/wrapper
-          curl -L -o gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.1.0/gradle/wrapper/gradle-wrapper.jar || \
-          wget -O gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.1.0/gradle/wrapper/gradle-wrapper.jar || \
-          echo "Failed to download wrapper jar, will try to generate it"
+          curl -L -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/v8.1.0/gradle/wrapper/gradle-wrapper.jar || \
+          wget -O gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/v8.1.0/gradle/wrapper/gradle-wrapper.jar || \
+          (echo "Downloading from services.gradle.org..." && \
+           curl -L -o gradle/wrapper/gradle-wrapper.jar https://services.gradle.org/distributions/gradle-8.1-bin.zip && \
+           unzip -j gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.jar 2>/dev/null || true)
         fi
         chmod +x gradlew || true
         
