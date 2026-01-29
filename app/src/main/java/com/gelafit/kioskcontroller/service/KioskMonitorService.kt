@@ -28,6 +28,22 @@ class KioskMonitorService : Service() {
         private const val NOTIFICATION_ID = 1
         private const val CHANNEL_ID = "kiosk_monitor_channel"
         private const val CHECK_INTERVAL_SECONDS = 5L // Verifica a cada 5 segundos
+        
+        /**
+         * Inicia o serviço de monitoramento
+         */
+        fun start(context: Context) {
+            val serviceIntent = Intent(context, KioskMonitorService::class.java)
+            
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                context.startForegroundService(serviceIntent)
+            } else {
+                context.startService(serviceIntent)
+            }
+            
+            // Inicia também o WorkManager como backup
+            KioskMonitorWorker.startPeriodicWork(context)
+        }
     }
     
     override fun onCreate() {
@@ -230,22 +246,6 @@ class KioskMonitorWorker(context: Context, params: WorkerParameters) : Coroutine
                 ExistingPeriodicWorkPolicy.KEEP,
                 workRequest
             )
-        }
-        
-        /**
-         * Inicia o serviço de monitoramento
-         */
-        fun start(context: Context) {
-            val serviceIntent = Intent(context, KioskMonitorService::class.java)
-            
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                context.startForegroundService(serviceIntent)
-            } else {
-                context.startService(serviceIntent)
-            }
-            
-            // Inicia também o WorkManager como backup
-            startPeriodicWork(context)
         }
     }
 }

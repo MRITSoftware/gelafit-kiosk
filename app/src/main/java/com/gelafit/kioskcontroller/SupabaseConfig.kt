@@ -15,9 +15,11 @@ object SupabaseConfig {
     // TODO: Substitua pelo package name do seu app Flutter
     const val FLUTTER_APP_PACKAGE = "com.gelafit.app"
     
-    val client: SupabaseClient = createSupabaseClient(SUPABASE_URL) {
-        install(Postgrest)
+    val client: SupabaseClient = createSupabaseClient(
+        supabaseUrl = SUPABASE_URL,
         supabaseKey = SUPABASE_KEY
+    ) {
+        install(Postgrest)
     }
     
     /**
@@ -51,8 +53,7 @@ object SupabaseConfig {
     private suspend fun updateLastSeen(deviceId: String) {
         try {
             client.postgrest.from("devices")
-                .update {
-                    set("last_seen", "now()")
+                .update(mapOf("last_seen" to "now()")) {
                     filter {
                         eq("device_id", deviceId)
                     }
@@ -94,8 +95,7 @@ object SupabaseConfig {
                 } else {
                     // Atualiza is_active
                     client.postgrest.from("devices")
-                        .update {
-                            set("is_active", true)
+                        .update(mapOf("is_active" to true)) {
                             filter {
                                 eq("device_id", deviceId)
                             }
@@ -123,14 +123,4 @@ data class DeviceInsert(
     val unit_name: String?,
     val is_active: Boolean,
     val kiosk_mode: Boolean
-)
-
-data class DeviceStatus(
-    val id: String,
-    val device_id: String,
-    val unit_name: String?,
-    val is_active: Boolean,
-    val kiosk_mode: Boolean,
-    val last_seen: String?,
-    val registered_at: String?
 )
