@@ -4,6 +4,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:8.1.0"
@@ -11,12 +12,8 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+// Repositórios são definidos no settings.gradle
+// Não é necessário definir aqui devido ao RepositoriesMode.FAIL_ON_PROJECT_REPOS
 
 task clean(type: Delete) {
     delete rootProject.buildDir
