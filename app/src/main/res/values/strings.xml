@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gelafit Kiosk Controller</string>
+    <string name="service_running">Serviço de monitoramento ativo</string>
+    <string name="kiosk_mode_active">Modo Kiosk: ATIVO</string>
+    <string name="kiosk_mode_inactive">Modo Kiosk: INATIVO</string>
+    <string name="device_id_label">Device ID:</string>
+    <string name="flutter_app_package">com.gelafit.app</string>
+</resources>
